@@ -12,12 +12,23 @@
 </div>
 <div id="nav">
 	<ul>
-		<li><%=link_to"Questions" %></li>
+		<li><%=link_to"Home", root_path %></li>
 		<li><%=link_to"Movie News", 'http://www.imdb.com/' %></li>
 		<li><%=link_to"Contact Us" %></li>
 		<li><%=link_to"Movies", movies_path %></li>
+		<% if !signed_in? %>
+			<li><%=link_to "Sign In", signin_path %></li>
+		<% else %>
+			<li>Signed in as <%= @current_user.name %></li>
+			<li><%= link_to "Sign Out", signout_path %></li>
+		<% end %>
 	</ul>
 </div>
+
+<% flash.each do |key, value| %>
+	<div> class = "flash <%= key %>">
+	<%= value %>
+<% end %>
 
 <%= yield %>
 
